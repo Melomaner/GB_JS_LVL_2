@@ -96,6 +96,8 @@ header{
     /*Временная заглушка*/
     min-width: 409px;
     min-height: 500px;
+    top: 10px;
+    right: 55px;
 }
 
 .cart{
@@ -123,5 +125,9 @@ header{
 
 .product-item{
     margin: 20px;
+}
+.error{
+    text-align: center;
+    font-size: 50px;
 }
 
