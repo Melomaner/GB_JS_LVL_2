@@ -2,52 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Regular</title>
+    <title>eShop</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-</header>
-<script>
-    "use strict";
-    let repText1 = prompt("1) Текст для смены ковычек вводить тут. (Результат в консоль лог)");
-    if (repText1 !== null) {
-        console.log(repText1.replace(/'/g, '"'));
-    }
-    let repText2 = prompt("2) Игнорирование формата (текс'т). (Результат в консоль лог)");
-    // console.log(repText2)
-    // repText2 = repText2.replace(/'\b/ig, '" ')
-    // console.log(repText2.replace(/\b'/ig, ' "'));
-    // console.log(repText2.replace(/\bтест\b/i, '"тес\'т"'))
-    // console.log(repText2.match(/\bтест\b/i))
-    if (repText2 !== null) {
-        let indArr = [...repText2.matchAll(/'/ig)];
-        // console.log(indArr);
-        let preind;
-        let postind;
-        let pre;
-        let post;
-        for (let i = 0; i < indArr.length; i++) {
-            preind = repText2.charAt(indArr[i].index - 1);
-            postind = repText2.charAt(indArr[i].index + 1);
-            if (preind === "" || preind === " " || postind === "" || postind === " ") {
-                // console.log(repText2[indArr[i].index]);
-                // repText2.split("").splice(indArr[i].index, 1, '"').join("");
-                if (indArr[i].index !== 0) {
-                    pre = repText2.slice(0, indArr[i].index);
-                } else {
-                    pre = '';
-                }
-                if (indArr[i].index !== repText2.length - 1) {
-                    post = repText2.slice(indArr[i].index + 1 - repText2.length);
-                } else {
-                    post = '';
-                }
-                // console.log(pre + '"' + post);
-                repText2 = pre + '"' + post;
-            }
-        }
-        console.log(repText2);
-    }
-</script>
+<div id="app">
+    <header>
+        <div class="logo"> Интернет магазин</div>
+        <div class="cart">
+            <form action="#" class="search-form">
+                <input type="text" class="search-field" v-model="searchInput">
+                <button class="bts-search" @click="itemSearch(searchInput)">Поиск</button>
+            </form>
+            <button class="btn-cart" type="button" @click="openCart">Корзина</button>
+            <div class="cart-block" :class="{invisible: !open}"></div>
+        </div>
+    </header>
+    <main>
+        <div class="products">
+            <div class="product-item" v-for="product of products" :key="product.id_product">
+                <img :src="imgCatalog" alt="some img">
+                <div class="desc">
+                    <h3>{{product.product_name}}</h3>
+                    <p>{{product.price}}Руб.</p>
+                    <button class="buy-btn" @click="addProduct(product)">Купить</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
